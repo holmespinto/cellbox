@@ -1,14 +1,10 @@
-
 import { Row, Col } from 'react-bootstrap';
 // components
 import PageTitle from '../../../../components/PageTitle';
 import ComponentCategorias from './ComponentCategorias';
 /* status column render */
- 
-
 
 const Categorias = (): React$Element<React$FragmentType> => {
-  
     return (
         <>
             <PageTitle
@@ -20,10 +16,10 @@ const Categorias = (): React$Element<React$FragmentType> => {
             />
             <Row>
                 <Col lg={12}>
-                <ComponentCategorias/>
+                    <ComponentCategorias />
                 </Col>
             </Row>
-       </>
+        </>
     );
 };
 
