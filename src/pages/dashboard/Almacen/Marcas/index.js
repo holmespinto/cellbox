@@ -9,7 +9,7 @@ const Marcas = (): React$Element<React$FragmentType> => {
         <>
             <PageTitle
                 breadCrumbItems={[
-                    { label: 'Dashboard', path: '/dashboard/Dashboard' },
+                    { label: 'Inicio', path: '/dashboard/Dashboard' },
                     { label: 'Marcas', path: '/dashboard/almacen/marcas', active: true },
                 ]}
                 title={''}
