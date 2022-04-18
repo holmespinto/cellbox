@@ -11,7 +11,7 @@ const INIT_STATE = {
 };
 
 type AuthAction = { type: string, payload: { actionType?: string, data?: any, error?: string } };
-type State = { user?: {} | null, loading?: boolean, +value?: boolean };
+type State = { user?: {} | null, loading?: boolean,value?: boolean };
 
 const Auth = (state: State = INIT_STATE, action: AuthAction): any => {
     

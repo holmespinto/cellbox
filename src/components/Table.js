@@ -67,6 +67,7 @@ type TableProps = {
     pageSize: number,
     columns: Array<any>,
     data: Array<any>,
+    props: Array<any>,
     searchBoxClass?: string,
     tableClass?: string,
     theadClass?: string,

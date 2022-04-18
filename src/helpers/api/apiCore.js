@@ -207,6 +207,50 @@ class APICore {
             this.setLoggedInUser({ token, ...user, ...modifiedUser });
         }
     };
+
+    getDatos = (url) => {
+        const getconsultar = async () => {
+            try {
+                const res = await fetch(url);
+                const datos = await res.json();
+                return datos;
+            } catch (error) {
+                console.log(error);
+            }
+        };
+        return getconsultar();
+    };
+    setConsultas = (url) => {
+        const getconsultar = async () => {
+            try {
+                const res = await fetch(url);
+                const datos = await res.json();
+                return datos;
+            } catch (error) {
+                console.log(error);
+            }
+        };
+        return getconsultar();
+    };
+    consutaId = (url) => {
+        const getconsultarid = async () => {
+            try {
+                const res = await fetch(url);
+                const datos = await res.json();
+                datos.then(function (resp) {
+                    // console.log(resp);
+                    if (resp) {
+                        return resp;
+                    }
+                });
+                
+            } catch (error) {
+                console.log(error);
+            }
+        };
+        return getconsultarid();
+    };
+    
 }
 
 /*
