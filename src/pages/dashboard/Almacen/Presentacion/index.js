@@ -16,7 +16,7 @@ const Presentaciones = (): React$Element<React$FragmentType> => {
             />
             <Row>
                 <Col lg={12}>
-                    <ComponentPresentacion />
+                    <ComponentPresentacion/>
                 </Col>
             </Row>
         </>
