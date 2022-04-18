@@ -3,6 +3,7 @@ import React, { useState, useEffect } from 'react';
 import { Row, Col, Card, Button, Form, Modal } from 'react-bootstrap';
 import classNames from 'classnames';
 import { Link } from 'react-router-dom';
+import { environment } from './environments/environment';
 //import {logodark} from '../../../../assets/images/logo-dark.png';
 import Select from 'react-select';
 import swal from 'sweetalert';
@@ -60,7 +61,7 @@ const ActionColumn = ({ row }) => {
             dangerMode: true,
         }).then((d) => {
             if (d) {
-                const url = `https://api.compucel.co/v1/?&accion=marcas&opcion=eliminar&${response}`;
+                const url = `${environment.baseURL}v1/?&accion=marcas&opcion=eliminar&${response}`;
                 const respuesta = api.getDatos(`${url}`);
                 respuesta.then(function (resp) {
                     const records = resp;
@@ -92,7 +93,7 @@ const ActionColumn = ({ row }) => {
             }
             response = queryString;
 
-            const url = `https://api.compucel.co/v1/?&accion=marcas&opcion=actualizar&${response}`;
+            const url = `${environment.baseURL}v1/?&accion=marcas&opcion=actualizar&${response}`;
             const respuesta = api.getDatos(`${url}`);
             respuesta.then(function (resp) {
                 if (resp) {
@@ -123,11 +124,9 @@ const ActionColumn = ({ row }) => {
                                 value={temas.marca}
                                 onChange={(e) => setTemas({ ...temas, marca: e.target.value })}
                             />
-                            <Form.Control.Feedback type="invalid">
-                                Por favor, digite la marca.
-                            </Form.Control.Feedback>
+                            <Form.Control.Feedback type="invalid">Por favor, digite la marca.</Form.Control.Feedback>
                         </Form.Group>
-                          <Form.Group className="mb-3" controlId="status">
+                        <Form.Group className="mb-3" controlId="status">
                             <Form.Label>Status</Form.Label>
                             <Select
                                 type="select"
@@ -268,7 +267,7 @@ const FormMarca = (props) => {
                                     Por favor, digite la marca.
                                 </Form.Control.Feedback>
                             </Form.Group>
-                             <div className="button-list">
+                            <div className="button-list">
                                 <Button type="button" disabled={temas.message ? 'true' : ''} onClick={guardar}>
                                     +
                                 </Button>
@@ -345,11 +344,7 @@ const ComponentMarcas = (props: marcas): React$Element<any> => {
 
                             <Row>
                                 <Col sm={4}>
-                                    <FormMarca
-                                        signUpModal={signUpModal}
-                                        Close={Close}
-                                        toggleSignUp={toggleSignUp}
-                                    />
+                                    <FormMarca signUpModal={signUpModal} Close={Close} toggleSignUp={toggleSignUp} />
                                 </Col>
                                 <Col sm={8}>
                                     <div className="text-sm-end">
