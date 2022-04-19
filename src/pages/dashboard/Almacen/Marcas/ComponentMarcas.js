@@ -3,7 +3,7 @@ import React, { useState, useEffect } from 'react';
 import { Row, Col, Card, Button, Form, Modal } from 'react-bootstrap';
 import classNames from 'classnames';
 import { Link } from 'react-router-dom';
-import { environment } from './environments/environment';
+import { environment } from '../../environments/environments';
 //import {logodark} from '../../../../assets/images/logo-dark.png';
 import Select from 'react-select';
 import swal from 'sweetalert';
@@ -61,7 +61,7 @@ const ActionColumn = ({ row }) => {
             dangerMode: true,
         }).then((d) => {
             if (d) {
-                const url = `${environment.baseURL}v1/?&accion=marcas&opcion=eliminar&${response}`;
+                const url = `${environment.baseURL}?&accion=marcas&opcion=${environment.opEliminar}&${response}`;
                 const respuesta = api.getDatos(`${url}`);
                 respuesta.then(function (resp) {
                     const records = resp;
@@ -93,7 +93,7 @@ const ActionColumn = ({ row }) => {
             }
             response = queryString;
 
-            const url = `${environment.baseURL}v1/?&accion=marcas&opcion=actualizar&${response}`;
+            const url = `${environment.baseURL}?&accion=marcas&opcion=${environment.opActualizar}&${response}`;
             const respuesta = api.getDatos(`${url}`);
             respuesta.then(function (resp) {
                 if (resp) {
@@ -230,7 +230,7 @@ const FormMarca = (props) => {
             }
             response = queryString;
 
-            const url = `https://api.compucel.co/v1/?&accion=marcas&opcion=guardar&${response}`;
+            const url = `${environment.baseURL}?&accion=marcas&opcion=${environment.opGuardar}&${response}`;
             const respuesta = api.getDatos(`${url}`);
             respuesta.then(function (resp) {
                 if (resp) {
@@ -297,7 +297,7 @@ const ComponentMarcas = (props: marcas): React$Element<any> => {
     const [signUpModal, setSignUpModal] = useState(false);
 
     useEffect(() => {
-        const url = `https://api.compucel.co/v1/?&accion=marcas&opcion=consultar`;
+        const url = `${environment.baseURL}?&accion=marcas&opcion=${environment.opConsultar}`;
         const syllab = api.getDatos(`${url}`);
         syllab.then(function (resp) {
             if (resp) {
