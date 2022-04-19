@@ -6,12 +6,16 @@ import { Link } from 'react-router-dom';
 //import {logodark} from '../../../../assets/images/logo-dark.png';
 import Select from 'react-select';
 import swal from 'sweetalert';
+
 // components
 
 import Table from '../../../../components/Table';
+import { environment } from '../../environments/environments';
 //import swal from 'sweetalert';
 import { APICore } from '../../../../helpers/api/apiCore';
 const api = new APICore();
+
+const accion = 'perecederos';
 /* status column render */
 const StatusColumn = ({ row }) => {
     return (
@@ -65,7 +69,7 @@ const ActionColumn = ({ row }) => {
             dangerMode: true,
         }).then((d) => {
             if (d) {
-                const url = `https://api.compucel.co/v1/?&accion=perecederos&opcion=eliminar&${response}`;
+                const url = `${environment.baseURL}?&accion=${accion}&opcion=${environment.opEliminar}&${response}`;
                 const respuesta = api.getDatos(`${url}`);
                 respuesta.then(function (resp) {
                     const records = resp;
@@ -97,7 +101,7 @@ const ActionColumn = ({ row }) => {
             }
             response = queryString;
 
-            const url = `https://api.compucel.co/v1/?&accion=perecederos&opcion=actualizar&${response}`;
+            const url = `${environment.baseURL}?&accion=${accion}&opcion=${environment.opActualizar}&${response}`;
             const respuesta = api.getDatos(`${url}`);
             respuesta.then(function (resp) {
                 if (resp) {
@@ -344,7 +348,7 @@ const FormPerecedero = (props) => {
             }
             response = queryString;
 
-            const url = `https://api.compucel.co/v1/?&accion=perecederos&opcion=guardar&${response}`;
+            const url = `${environment.baseURL}?&accion=${accion}&opcion=${environment.opGuardar}&${response}`;
             const respuesta = api.getDatos(`${url}`);
             respuesta.then(function (resp) {
                 if (resp) {
@@ -411,7 +415,7 @@ const ComponentPerecederos = (props: perecederos): React$Element<any> => {
     const [signUpModal, setSignUpModal] = useState(false);
 
     useEffect(() => {
-        const url = `https://api.compucel.co/v1/?&accion=perecederos&opcion=consultar`;
+        const url = `${environment.baseURL}?&accion=${accion}&opcion=${environment.opConsultar}`;
         const syllab = api.getDatos(`${url}`);
         syllab.then(function (resp) {
             if (resp) {

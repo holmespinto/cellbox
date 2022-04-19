@@ -13,6 +13,7 @@ import Table from '../../../../components/Table';
 //import swal from 'sweetalert';
 import { APICore } from '../../../../helpers/api/apiCore';
 const api = new APICore();
+const accion = 'marcas';
 /* status column render */
 const StatusColumn = ({ row }) => {
     return (
@@ -61,7 +62,7 @@ const ActionColumn = ({ row }) => {
             dangerMode: true,
         }).then((d) => {
             if (d) {
-                const url = `${environment.baseURL}?&accion=marcas&opcion=${environment.opEliminar}&${response}`;
+                const url = `${environment.baseURL}?&accion=${accion}&opcion=${environment.opEliminar}&${response}`;
                 const respuesta = api.getDatos(`${url}`);
                 respuesta.then(function (resp) {
                     const records = resp;
@@ -93,7 +94,7 @@ const ActionColumn = ({ row }) => {
             }
             response = queryString;
 
-            const url = `${environment.baseURL}?&accion=marcas&opcion=${environment.opActualizar}&${response}`;
+            const url = `${environment.baseURL}?&accion=${accion}&opcion=${environment.opActualizar}&${response}`;
             const respuesta = api.getDatos(`${url}`);
             respuesta.then(function (resp) {
                 if (resp) {
@@ -230,7 +231,7 @@ const FormMarca = (props) => {
             }
             response = queryString;
 
-            const url = `${environment.baseURL}?&accion=marcas&opcion=${environment.opGuardar}&${response}`;
+            const url = `${environment.baseURL}?&accion=${accion}&opcion=${environment.opGuardar}&${response}`;
             const respuesta = api.getDatos(`${url}`);
             respuesta.then(function (resp) {
                 if (resp) {
@@ -297,7 +298,7 @@ const ComponentMarcas = (props: marcas): React$Element<any> => {
     const [signUpModal, setSignUpModal] = useState(false);
 
     useEffect(() => {
-        const url = `${environment.baseURL}?&accion=marcas&opcion=${environment.opConsultar}`;
+        const url = `${environment.baseURL}?&accion=${accion}&opcion=${environment.opConsultar}`;
         const syllab = api.getDatos(`${url}`);
         syllab.then(function (resp) {
             if (resp) {

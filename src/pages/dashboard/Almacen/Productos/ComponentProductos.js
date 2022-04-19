@@ -9,9 +9,11 @@ import swal from 'sweetalert';
 // components
 
 import Table from '../../../../components/Table';
+import { environment } from '../../environments/environments';
 //import swal from 'sweetalert';
 import { APICore } from '../../../../helpers/api/apiCore';
 const api = new APICore();
+const accion = 'productos';
 /* status column render */
 const StatusColumn = ({ row }) => {
     return (
@@ -69,7 +71,7 @@ const ActionColumn = ({ row }) => {
             }
             response = queryString;
 
-            const url = `https://api.compucel.co/v1/?&accion=productos&opcion=actualizar&${response}`;
+            const url = `${environment.baseURL}?&accion=${accion}&opcion=${environment.opActualizar}&${response}`;
             const respuesta = api.getDatos(`${url}`);
             respuesta.then(function (resp) {
                 if (resp) {
@@ -244,7 +246,7 @@ const FormProductos = (props) => {
             }
             response = queryString;
 
-            const url = `https://api.compucel.co/v1/?&accion=productos&opcion=guardar&${response}`;
+            const url = `${environment.baseURL}?&accion=${accion}&opcion=${environment.opGuardar}&${response}`;
             const respuesta = api.getDatos(`${url}`);
             respuesta.then(function (resp) {
                 if (resp) {
@@ -399,7 +401,7 @@ const ComponetProductos = (props: productos): React$Element<any> => {
     const [signUpModal, setSignUpModal] = useState(false);
 
     useEffect(() => {
-        const url = `https://api.compucel.co/v1/?&accion=productos&opcion=consultar`;
+        const url = `${environment.baseURL}?&accion=${accion}&opcion=${environment.opConsultar}`;
         const syllab = api.getDatos(`${url}`);
         syllab.then(function (resp) {
             if (resp) {
