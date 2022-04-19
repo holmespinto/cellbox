@@ -18,7 +18,7 @@ const Clientes = (): React$Element<React$FragmentType> => {
             />
             <Row>
                 <Col lg={12}>
-                <h4 className="page-title">administrador de Clientes</h4>
+                <h4 className="page-title">administrador de Cliente</h4>
                 </Col>
             </Row>
        </>
