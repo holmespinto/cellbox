@@ -5,6 +5,7 @@ import classNames from 'classnames';
 import { Link } from 'react-router-dom';
 import { environment } from '../../environments/environments';
 //import {logodark} from '../../../../assets/images/logo-dark.png';
+import { options_marcas } from '../constant';
 import Select from 'react-select';
 import swal from 'sweetalert';
 // components
@@ -15,7 +16,9 @@ import { APICore } from '../../../../helpers/api/apiCore';
 const api = new APICore();
 const accion = 'marcas';
 /* status column render */
+
 const StatusColumn = ({ row }) => {
+    console.log(options_marcas.options);
     return (
         <React.Fragment>
             <span
@@ -32,7 +35,7 @@ const StatusColumn = ({ row }) => {
 const ActionColumn = ({ row }) => {
     const INIT_TEMAS = {
         id: row.cells[1].value ? row.cells[1].value : row.cells[1].value,
-        marca: row.cells[2].value ? row.cells[2].value : row.cells[2].value,
+        marcas: row.cells[2].value ? row.cells[2].value : row.cells[2].value,
         status: row.cells[3].value ? row.cells[3].value : row.cells[3].value,
     };
 
@@ -184,7 +187,7 @@ const columns = [
     },
     {
         Header: 'Marca',
-        accessor: 'marca',
+        accessor: 'marcas',
         sort: true,
     },
     {
