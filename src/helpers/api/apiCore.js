@@ -232,8 +232,22 @@ class APICore {
         };
         return getconsultar();
     };
-}
 
+    setLista = (url) => {
+        // eslint-disable-next-line no-undef
+        const getLista = async () => {
+            try {
+                const res = await fetch(url);
+                const datos = await res.json();
+                return datos;
+            } catch (error) {
+                console.log(error);
+            }
+        };
+
+        return getLista();
+    };
+}
 /*
 Check if token available in session
 */

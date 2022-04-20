@@ -1,4 +1,4 @@
-export const environment = {
+const environment = {
     production: true,
     baseURL: 'https://api.compucel.co/v1/',
     opEliminar: 'eliminar',
@@ -6,3 +6,4 @@ export const environment = {
     opGuardar: 'guardar',
     opConsultar: 'consultar',
 };
+export { environment };

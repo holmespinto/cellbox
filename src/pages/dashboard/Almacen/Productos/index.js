@@ -1,9 +1,12 @@
 // @flow
-import { Row, Col, Card } from 'react-bootstrap';
-//import React, { useState } from 'react';
+import { Row, Col } from 'react-bootstrap';
+
 // components
 import PageTitle from '../../../../components/PageTitle';
 import ComponentProductos from './ComponentProductos';
+import { APICore } from '../../../../helpers/api/apiCore';
+const api = new APICore();
+
 const Productos = (): React$Element<React$FragmentType> => {
     return (
         <>
