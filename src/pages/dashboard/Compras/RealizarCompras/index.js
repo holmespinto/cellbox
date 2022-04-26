@@ -4,9 +4,7 @@ import { Row, Col, Card } from 'react-bootstrap';
 // components
 import PageTitle from '../../../../components/PageTitle';
 
-
 const RealizarCompras = (): React$Element<React$FragmentType> => {
-  
     return (
         <>
             <PageTitle
@@ -14,14 +12,14 @@ const RealizarCompras = (): React$Element<React$FragmentType> => {
                     { label: 'Dashboard', path: '/dashboard/Dashboard' },
                     { label: 'RealizarCompras', path: '/dashboard/compras/realizarcompras', active: true },
                 ]}
-                title={'Realizar Compras'}
+                title={'Facturar Venta'}
             />
             <Row>
                 <Col lg={12}>
-                <h4 className="page-title">administrador de Realizar Compras</h4>
+                    <h4 className="page-title">administrador de Realizar Compras</h4>
                 </Col>
             </Row>
-       </>
+        </>
     );
 };
 

@@ -44,9 +44,9 @@ const AdministrarCreditos = React.lazy(() => import('../pages/dashboard/VentasAl
 const AbrirNuevoInventario = React.lazy(() => import('../pages/dashboard/Inventario/AbrirNuevoInventario'));
 const Kardex = React.lazy(() => import('../pages/dashboard/Inventario/Kardex'));
 
-
-
-
+//configuraciones
+const menu = React.lazy(() => import('../pages/dashboard/configuraciones/menu'));
+const usuarios = React.lazy(() => import('../pages/dashboard/configuraciones/usuarios'));
 // root routes
 const rootRoute = {
     path: '/',
@@ -97,13 +97,13 @@ const dashboardRoutes = {
             name: 'GenerarCotizacion',
             component: GenerarCotizacion,
             route: PrivateRoute,
-        }, 
+        },
         {
             path: '/dashboard/cotizaciones/vercotizacion',
             name: 'VerCotizacion',
             component: VerCotizacion,
             route: PrivateRoute,
-        }, 
+        },
         {
             path: '/dashboard/compras/proveedores',
             name: 'Proveedores',
@@ -178,18 +178,28 @@ const dashboardRoutes = {
         },
         {
             path: '/dashboard/inventario/abrirnuevoinventario',
-            name: 'AdministrarCreditos',
+            name: 'abrirnuevoinventario',
             component: AbrirNuevoInventario,
             route: PrivateRoute,
         },
         {
             path: '/dashboard/inventario/kardex',
-            name: 'AdministrarCreditos',
+            name: 'kardex',
             component: Kardex,
             route: PrivateRoute,
-        }
-
-        
+        },
+        {
+            path: '/dashboard/configuraciones/menu',
+            name: 'menu',
+            component: menu,
+            route: PrivateRoute,
+        },
+        {
+            path: '/dashboard/configuraciones/usuarios',
+            name: 'usuarios',
+            component: usuarios,
+            route: PrivateRoute,
+        },
     ],
 };
 

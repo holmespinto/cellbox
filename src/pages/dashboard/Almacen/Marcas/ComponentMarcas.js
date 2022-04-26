@@ -18,7 +18,7 @@ const accion = 'marcas';
 /* status column render */
 
 const StatusColumn = ({ row }) => {
-    console.log(options_marcas.options);
+    //console.log(options_marcas.options);
     return (
         <React.Fragment>
             <span

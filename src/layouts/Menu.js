@@ -20,7 +20,7 @@ const MenuItemWithChildren = ({ item, linkClassName, subMenuClassNames, activeMe
         if (toggleMenu) toggleMenu(item, status);
         return false;
     };
-
+    console.log('item', item);
     return (
         <li className={classNames('side-nav-item', { 'menuitem-active': open })}>
             <Link
@@ -83,6 +83,7 @@ const MenuItem = ({ item, className, linkClassName }) => {
 };
 
 const MenuItemLink = ({ item, className }) => {
+    //console.log(item);
     return (
         <Link
             to={item.url}
@@ -136,6 +137,7 @@ const AppMenu = ({ menuItems, location }: AppMenuProps) => {
 
         if (div) {
             let items: any = div.getElementsByClassName('side-nav-link-ref');
+
             for (let i = 0; i < items.length; ++i) {
                 if (location.pathname === items[i].pathname) {
                     matchingMenuItem = items[i];
@@ -146,6 +148,7 @@ const AppMenu = ({ menuItems, location }: AppMenuProps) => {
             if (matchingMenuItem) {
                 const mid = matchingMenuItem.getAttribute('data-menu-key');
                 const activeMt = findMenuItem(menuItems, mid);
+
                 if (activeMt) {
                     setActiveMenuItems([activeMt['key'], ...findAllParent(menuItems, activeMt)]);
                 }

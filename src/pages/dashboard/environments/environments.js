@@ -5,5 +5,7 @@ const environment = {
     opActualizar: 'actualizar',
     opGuardar: 'guardar',
     opConsultar: 'consultar',
+    Configurar: 'configurar',
+    Search: 'usersearch',
 };
 export { environment };

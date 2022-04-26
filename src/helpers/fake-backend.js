@@ -35,7 +35,7 @@ export function configureFakeBackend() {
                 Usuarios.then(function (response) {
                     // let paramus = JSON.parse(response);
                     let user = response[0];
-                    console.log(response);
+                    //console.log(response);
                     if (!user || user.username === 'null') {
                         // else return error
                         //sessionStorage.removeItem('user_asignaturas');
@@ -60,7 +60,7 @@ export function configureFakeBackend() {
                                 email_personal: user.email_personal,
                                 username: user.username,
                                 password: user.password,
-                                role: user.role,
+                                role: user.rol,
                                 token: TOKEN,
                             };
 
@@ -108,7 +108,7 @@ export function configureFakeBackend() {
                                 email_personal: params.email_personal,
                                 username: params.username,
                                 password: params.password,
-                                role: params.role,
+                                role: params.rol,
                                 token: TOKEN,
                             };
                             users.push({ newUser });

@@ -16,7 +16,6 @@ import { APICore } from '../../../../helpers/api/apiCore';
 const api = new APICore();
 const accion = 'productos';
 
-console.log(options_marcas);
 /* status column render */
 const StatusColumn = ({ row }) => {
     return (

@@ -2,7 +2,7 @@ import jwtDecode from 'jwt-decode';
 import axios from 'axios';
 
 import config from '../../config';
-
+import { environment } from '../../pages/dashboard/environments/environments';
 // content type
 axios.defaults.headers.post['Content-Type'] = 'application/json';
 axios.defaults.baseURL = config.API_URL;
@@ -247,6 +247,18 @@ class APICore {
 
         return getLista();
     };
+    MenuPrincipal(params) {
+        const menus = [];
+        // const user = sessionStorage.getItem(AUTH_SESSION_KEY);
+        const url = `${environment.baseURL}?&accion=${params}&id=1&opcion=${environment.opConsultar}`;
+        const datos = this.setLista(`${url}`);
+        datos.then(function (resp) {
+            menus.push(resp);
+        });
+        const MENU_ITEMS = menus;
+
+        if (MENU_ITEMS) return MENU_ITEMS;
+    }
 }
 /*
 Check if token available in session
