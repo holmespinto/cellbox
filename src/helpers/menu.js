@@ -1,7 +1,8 @@
-import MENU_ITEMS from '../constants/menu';
-
+//import MENU_ITEMS from '../constants/menu';
+import { APICore } from '../helpers/api/apiCore';
 const getMenuItems = () => {
-    // NOTE - You can fetch from server and return here as well
+    const api = new APICore();
+    const MENU_ITEMS = api.MenuPrincipal();
     return MENU_ITEMS;
 };
 

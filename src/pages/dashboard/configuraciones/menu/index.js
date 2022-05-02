@@ -1,5 +1,5 @@
 import { Row, Col } from 'react-bootstrap';
-import React, { useState, useEffect } from 'react';
+import React, { Suspense, useState, useEffect } from 'react';
 import { environment } from '../../environments/environments';
 
 // components
@@ -30,7 +30,7 @@ const Menu = (): React$Element<any> => {
     const [options, setusers] = useState([]);
     const [textcolor, setcolortext] = useState('danger');
     const [fichaOpen, setFichaOpen] = useState(false);
-
+    const loading = () => <div className=""></div>;
     useEffect(() => {
         if (users && users.length > 0) {
             setusers(users);
@@ -72,13 +72,22 @@ const Menu = (): React$Element<any> => {
             <br />
             <Row>
                 <Col lg={12}>
-                    <UserSearch options={options} onStateFicha={onStateFicha} selectedOption={selectedOption} />
+                    <Suspense fallback={loading()}>
+                        <UserSearch options={options} onStateFicha={onStateFicha} selectedOption={selectedOption} />
+                    </Suspense>
                 </Col>
             </Row>
             <br />
             <Row>
                 <Col lg={4}>
-                    <FichaUser label={'Primary'} color={'primary'} stateficha={selectedOption} textcolor={textcolor} />
+                    <Suspense fallback={loading()}>
+                        <FichaUser
+                            label={'Primary'}
+                            color={'primary'}
+                            stateficha={selectedOption}
+                            textcolor={textcolor}
+                        />
+                    </Suspense>
                 </Col>
                 {fichaOpen &&
                     mtems &&
@@ -88,14 +97,16 @@ const Menu = (): React$Element<any> => {
                             return (
                                 <>
                                     <Col xl={4} key={index}>
-                                        <ItemsMenus
-                                            toppings={mtems}
-                                            title={arrs.label}
-                                            icon={arrs.icon}
-                                            id_user={id_user}
-                                            children={mtems[index + 1]}
-                                            guardarPermisos={guardarPermisos}
-                                        />
+                                        <Suspense fallback={loading()}>
+                                            <ItemsMenus
+                                                toppings={mtems}
+                                                title={arrs.label}
+                                                icon={arrs.icon}
+                                                id_user={id_user}
+                                                children={mtems[index + 1]}
+                                                guardarPermisos={guardarPermisos}
+                                            />
+                                        </Suspense>
                                     </Col>
                                 </>
                             );

@@ -14,7 +14,6 @@ import { authApiResponseSuccess, authApiResponseError } from './actions';
 import { AuthActionTypes } from './constants';
 
 const api = new APICore();
-
 /**
  * Login the user
  * @param {*} payload - username and password
@@ -23,6 +22,10 @@ function* login({ payload: { username, password } }) {
     try {
         const response = yield call(loginApi, { username, password });
         const user = response.data;
+        // const menus = api.MenuPrincipal('menu', user['id']);
+        //api.setMenu(menus);
+        //console.log('saga', MENU_ITEMS);
+
         // NOTE - You can change this according to response format from your api
         api.setLoggedInUser(user);
         setAuthorization(user['token']);

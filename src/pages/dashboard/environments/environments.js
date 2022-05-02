@@ -7,5 +7,6 @@ const environment = {
     opConsultar: 'consultar',
     Configurar: 'configurar',
     Search: 'usersearch',
+    usuarios: 'usuarios',
 };
 export { environment };

@@ -30,6 +30,7 @@ type AppProps = {};
 /**
  * Main app component
  */
+
 const App = (props: AppProps): React$Element<any> => {
     return <Routes></Routes>;
 };

@@ -1,11 +1,9 @@
 // @flow
-import React, { useEffect, useRef } from 'react';
+import React, { useEffect, useRef, useState } from 'react';
 import { Link } from 'react-router-dom';
 import SimpleBar from 'simplebar-react';
+import { useSelector } from 'react-redux';
 //import classNames from 'classnames';
-
-import { getMenuItems } from '../helpers/menu';
-
 // components
 import AppMenu from './Menu';
 
@@ -13,17 +11,25 @@ import logoSm from '../assets/images/logo_sm.png';
 import logoDark from '../assets/images/logo-dark.png';
 import logoDarkSm from '../assets/images/logo_sm_dark.png';
 import logo from '../assets/images/logo.png';
+
 //import helpBoxImage from '../assets/images/help-icon.svg';
 //import profileImg from '../assets/images/users/avatar-1.jpg';
 
 type SideBarContentProps = {
     hideUserProfile: boolean,
 };
-const menuItems = getMenuItems();
 
 /* sidebar content */
 const SideBarContent = ({ hideUserProfile }: SideBarContentProps) => {
-    // console.log('men', menuItems);
+    const user = useSelector((state) => state.Auth.user);
+
+    const [menuitems, setState] = useState([]);
+    useEffect(() => {
+        if (user) {
+            setState(user.menu);
+        }
+    }, [user]);
+    //console.log('menu', menu);
     return (
         <>
             <div className="side-nav">
@@ -31,7 +37,8 @@ const SideBarContent = ({ hideUserProfile }: SideBarContentProps) => {
                     <span className="side-nav-title side-nav-item">Ménu Principal</span>
                 </Link>
             </div>
-            <AppMenu menuItems={menuItems[0]} />
+            <div className="clearfix" />
+            <AppMenu menuItems={menuitems} />
             <div className="clearfix" />
         </>
     );
@@ -89,15 +96,10 @@ const LeftSidebar = ({ isCondensed, isLight, hideLogo, hideUserProfile }: LeftSi
                     </Link>
                 </React.Fragment>
 
-                {!isCondensed && (
-                    <SimpleBar style={{ maxHeight: '100%' }} timeout={500} scrollbarMaxSize={320}>
-                        <SideBarContent
-                            menuClickHandler={() => {}}
-                            isLight={isLight}
-                            hideUserProfile={hideUserProfile}
-                        />
-                    </SimpleBar>
-                )}
+                <SimpleBar style={{ maxHeight: '100%' }} timeout={500} scrollbarMaxSize={320}>
+                    <SideBarContent menuClickHandler={() => {}} isLight={isLight} hideUserProfile={hideUserProfile} />
+                </SimpleBar>
+
                 {isCondensed && <SideBarContent isLight={isLight} hideUserProfile={hideUserProfile} />}
             </div>
         </React.Fragment>

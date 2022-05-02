@@ -2,7 +2,7 @@ import jwtDecode from 'jwt-decode';
 import axios from 'axios';
 
 import config from '../../config';
-import { environment } from '../../pages/dashboard/environments/environments';
+
 // content type
 axios.defaults.headers.post['Content-Type'] = 'application/json';
 axios.defaults.baseURL = config.API_URL;
@@ -42,7 +42,7 @@ axios.interceptors.response.use(
 );
 
 const AUTH_SESSION_KEY = 'hyper_user';
-
+const MENU_SESSION_KEY = 'hyper_user';
 /**
  * Sets the default authorization
  * @param {*} token
@@ -192,7 +192,14 @@ class APICore {
             sessionStorage.removeItem(AUTH_SESSION_KEY);
         }
     };
-
+    setMenu = (session) => {
+        if (session) {
+            console.log('session', session);
+            sessionStorage.setItem(MENU_SESSION_KEY, JSON.stringify(session));
+        } else {
+            sessionStorage.removeItem(MENU_SESSION_KEY);
+        }
+    };
     /**
      * Returns the logged in user
      */
@@ -247,17 +254,20 @@ class APICore {
 
         return getLista();
     };
-    MenuPrincipal(params) {
-        const menus = [];
-        // const user = sessionStorage.getItem(AUTH_SESSION_KEY);
-        const url = `${environment.baseURL}?&accion=${params}&id=1&opcion=${environment.opConsultar}`;
+    MenuPrincipal() {
+        //const menus = [];
+        /*
+        const url = `${environment.baseURL}?&accion=${params}&id=${id_user}&opcion=${environment.opConsultar}`;
         const datos = this.setLista(`${url}`);
         datos.then(function (resp) {
+            // console.log('resp', resp.menu);
             menus.push(resp);
         });
-        const MENU_ITEMS = menus;
-
-        if (MENU_ITEMS) return MENU_ITEMS;
+        */
+        let user = getUserFromSession();
+        if (user) {
+            if (user.menus) return user.menus;
+        }
     }
 }
 /*
@@ -270,5 +280,4 @@ if (user) {
         setAuthorization(token);
     }
 }
-
 export { APICore, setAuthorization };

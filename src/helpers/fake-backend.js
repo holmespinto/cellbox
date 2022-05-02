@@ -1,5 +1,6 @@
 import axios from 'axios';
 import MockAdapter from 'axios-mock-adapter';
+import { environment } from '../pages/dashboard/environments/environments';
 import { APICore } from './api/apiCore';
 
 const api = new APICore();
@@ -29,16 +30,13 @@ export function configureFakeBackend() {
                 // find if any user matches login credentials
                 //  var ciphertext = CryptoJS.AES.encrypt('123456789', 'secret key 123').toString();
 
-                ///CARGAR PERIODO
-                const url = `https://api.compucel.co/v1/?&accion=usuarios&operacion=sindoc&opcion=consultar&username=${params.username}`;
+                const url = `${environment.baseURL}?accion=${environment.usuarios}&opcion=${environment.opConsultar}&username=${params.username}`;
                 const Usuarios = api.setConsultas(`${url}`);
                 Usuarios.then(function (response) {
-                    // let paramus = JSON.parse(response);
-                    let user = response[0];
-                    //console.log(response);
+                    let user = response.user[0];
+                    let menu = response.menu;
                     if (!user || user.username === 'null') {
                         // else return error
-                        //sessionStorage.removeItem('user_asignaturas');
                         resolve([401, { message: 'Username or password is incorrect' }]);
                     } else {
                         let usuario = () => {
@@ -50,6 +48,7 @@ export function configureFakeBackend() {
                             // if login details are valid return user details and fake jwt
 
                             const TOKEN = generateToken(user);
+
                             let usuario = {
                                 id: user.id,
                                 primer_nombre: user.primer_nombre,
@@ -62,8 +61,9 @@ export function configureFakeBackend() {
                                 password: user.password,
                                 role: user.rol,
                                 token: TOKEN,
+                                menu: menu,
                             };
-
+                            //console.log('MENU_ITEMS', usuario);
                             resolve([200, usuario]);
                         } else {
                             sessionStorage.removeItem('user_asignaturas');
@@ -80,7 +80,7 @@ export function configureFakeBackend() {
                 // get parameters from post request
                 let CryptoJS = require('crypto-js');
                 let params = JSON.parse(config.data);
-                const url = `https://api.compucel.co/v1/?&accion=usuarios&opcion=registrar`;
+                const url = `${environment.baseURL}?accion=usuarios&opcion=registrar`;
                 const Usuarios = api.setConsultas(`${url}?username=${params.username}`);
                 Usuarios.then(function (response) {
                     let paramus = JSON.parse(response);
@@ -96,7 +96,6 @@ export function configureFakeBackend() {
                             return users.username === params.username && password === params.password;
                         };
                         if (usuario) {
-                            // if login details are valid return user details and fake jwt
                             const TOKEN = '';
                             let newUser = {
                                 id: users.length + 1,
@@ -119,9 +118,6 @@ export function configureFakeBackend() {
                         }
                     }
                 });
-
-                // add new users
-                //let [firstName, lastName] = params.fullname.split(' ');
             }, 1000);
         });
     });

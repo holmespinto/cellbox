@@ -1,7 +1,7 @@
 import { Row, Col } from 'react-bootstrap';
 // components
 import PageTitle from '../../../../components/PageTitle';
-
+import ComponentUsuarios from './ComponentUsuarios';
 /* status column render */
 
 const Usuarios = (): React$Element<React$FragmentType> => {
@@ -15,7 +15,9 @@ const Usuarios = (): React$Element<React$FragmentType> => {
                 title={'Configuración de usuarios'}
             />
             <Row>
-                <Col lg={12}></Col>
+                <Col lg={12}>
+                    <ComponentUsuarios />
+                </Col>
             </Row>
         </>
     );
