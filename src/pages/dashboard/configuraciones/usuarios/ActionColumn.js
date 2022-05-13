@@ -1,17 +1,49 @@
-import { Row, Col } from 'react-bootstrap';
+// @flow
 import React, { useState, useEffect } from 'react';
-// components
-import PageTitle from '../../../../components/PageTitle';
-import Grid from './Grid';
-import { INIT_CAMPOS, INIT_VALUES, patrones } from './constants';
-import { any } from 'prop-types';
+//import { Button, Form, Modal } from 'react-bootstrap';
+//import classNames from 'classnames';
+import swal from 'sweetalert';
+import { Link } from 'react-router-dom';
+//import Select from 'react-select';
+//import swal from 'sweetalert';
+import { APICore } from '../../../../helpers/api/apiCore';
+import { environment } from '../../environments/environments';
+import Forms from './Forms';
+import { INIT_CAMPOS, patrones } from './constants';
+const accion = 'usuarios';
+const api = new APICore();
 
-/* status column render */
+const ActionColumn = ({ row }) => {
+    const INIT_VALUES = {
+        form: {
+            id: row.cells[1].value ? row.cells[1].value : row.cells[1].value,
+            numero_documento: row.cells[2].value ? row.cells[2].value : row.cells[2].value,
+            username: row.cells[3].value ? row.cells[3].value : row.cells[3].value,
+            primer_nombre: row.cells[4].value ? row.cells[4].value : row.cells[4].value,
+            segundo_nombre: row.cells[5].value ? row.cells[5].value : row.cells[5].value,
+            primer_apellido: row.cells[6].value ? row.cells[6].value : row.cells[6].value,
+            segundo_apellido: row.cells[7].value ? row.cells[7].value : row.cells[7].value,
+            email_personas: row.cells[8].value ? row.cells[8].value : row.cells[8].value,
+            celular: row.cells[9].value ? row.cells[9].value : row.cells[9].value,
+            direccion: row.cells[10].value ? row.cells[10].value : row.cells[10].value,
+            sexo: row.cells[11].value ? row.cells[11].value : row.cells[11].value,
+            idRol: row.cells[12].value ? row.cells[12].value : row.cells[12].value,
+            id_empresa: row.cells[13].value ? row.cells[13].value : row.cells[13].value,
+            status: row.cells[14].value ? row.cells[14].value : row.cells[14].value,
+        },
+        alerts: {
+            now: 0,
+            textcolor: 'success',
+            mensalert: '',
+            validated: false,
+            disabled: false,
+            key: null,
+        },
+    };
 
-const Usuarios = (): React$Element<React$FragmentType> => {
+    const [signUpModal, setSignUpModal] = useState(false);
     const [values, setValues] = useState(INIT_VALUES);
     const [alert, setAlerts] = useState([]);
-    const [signUpModal, setSignUpModal] = useState(false);
     const [btndisabled, setBtnGuardar] = useState(false);
     /*
      * validar  Campo
@@ -93,6 +125,9 @@ const Usuarios = (): React$Element<React$FragmentType> => {
             setAlerts(values.alerts[0]);
         }
     }, [values]);
+
+    const eliminar = () => {};
+
     const toggleSignUp = () => {
         setSignUpModal(!signUpModal);
         setBtnGuardar(false);
@@ -103,31 +138,28 @@ const Usuarios = (): React$Element<React$FragmentType> => {
         setValues([]);
         setBtnGuardar(!btndisabled);
     };
+    //console.log(row);
     return (
-        <>
-            <PageTitle
-                breadCrumbItems={[
-                    { label: 'Dashboard', path: '/dashboard/Dashboard' },
-                    { label: 'Usuarios', path: '/dashboard/configuraciones/usuarios', active: true },
-                ]}
-                title={'Configuración de usuarios'}
+        <React.Fragment>
+            <Forms
+                campos={INIT_CAMPOS}
+                onValideCampo={onValideCampo}
+                values={values}
+                alerts={alert}
+                signUpModal={signUpModal}
+                toggleSignUp={toggleSignUp}
+                Close={Close}
+                accion={'actualizar'}
             />
-            <Row>
-                <Col lg={12}>
-                    <Grid
-                        campos={INIT_CAMPOS}
-                        onValideCampo={onValideCampo}
-                        signUpModal={signUpModal}
-                        btndisabled={btndisabled}
-                        values={values}
-                        alerts={alert}
-                        toggleSignUp={toggleSignUp}
-                        Close={Close}
-                    />
-                </Col>
-            </Row>
-        </>
+            <Link to="#" className="action-icon" onClick={() => toggleSignUp()}>
+                {' '}
+                <i className="mdi mdi-square-edit-outline"></i>
+            </Link>
+            <Link to="#" className="action-icon" onClick={() => eliminar()}>
+                {' '}
+                <i className="mdi mdi-delete"></i>
+            </Link>
+        </React.Fragment>
     );
 };
-
-export default Usuarios;
+export default ActionColumn;
